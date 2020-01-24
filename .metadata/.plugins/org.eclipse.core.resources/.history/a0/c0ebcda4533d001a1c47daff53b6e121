@@ -1,0 +1,25 @@
+package com.example.demo.controller;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.dto.EmpresaDTO;
+import com.example.demo.dto.PersonaDTO;
+import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.exceptions.ValidacionException;
+import com.example.demo.service.EmpresaService;
+
+public class EmpresaController {
+	
+	@Autowired
+	private EmpresaService empresaService;
+	
+	@GetMapping("/personas/{id}")
+	public PersonaDTO obtenerPersonaPorId(@PathVariable("id") Long id) throws ResourceNotFoundException {
+		ModelMapper mapper = new ModelMapper();
+		return mapper.map(personaService.obtenerPersonaPorId(id), PersonaDTO.class);
+	}
+	
+}

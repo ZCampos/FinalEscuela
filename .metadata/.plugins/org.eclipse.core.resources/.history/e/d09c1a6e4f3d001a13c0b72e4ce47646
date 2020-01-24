@@ -1,0 +1,19 @@
+package com.example.demo.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.feign.EmpresaClient;
+import com.example.demo.service.FeignService;
+
+public class EmpleadoFeignImpl extends FeignService{
+	@Autowired
+	private EmpresaClient empresaClient;
+	public EmpresaDTO obtenerEmpresaPorId(Long id) {
+		return empresaClient.obtenerEmpresaPorId(id);
+	}
+	public EmpresaDTO obtenerEmpresaDefecto(Long id) {
+		EmpresaDTO empresaDTO = new EmpresaDTO();
+		empresaDTO.setNombre();
+		return empresaDTO;
+	}
+}

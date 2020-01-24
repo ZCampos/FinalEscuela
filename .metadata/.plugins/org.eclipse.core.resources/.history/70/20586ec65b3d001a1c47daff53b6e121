@@ -1,0 +1,10 @@
+server: 
+  port: 9090
+zuul:
+  routes:
+    producto:
+      path: /empresa/**
+      service-id: empresa-ms
+
+    
+     

@@ -1,0 +1,12 @@
+package com.example.demo.entidad;
+
+
+@Getter
+@Setter
+public class Empresa {
+
+	private long idEmpresa;
+	private String nombre;
+	private String Ruc;
+	private String direccion;
+}

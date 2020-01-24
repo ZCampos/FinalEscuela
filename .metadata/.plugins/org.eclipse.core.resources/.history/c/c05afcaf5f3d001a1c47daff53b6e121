@@ -1,0 +1,2 @@
+spring:  application:    name: empleado-ms  cloud:    config:      uri: http://localhost:8800
+server:  port: 8891eureka:  instance:    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}

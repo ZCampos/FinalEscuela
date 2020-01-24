@@ -1,0 +1,17 @@
+package com.example.demo.entidad;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+
+public class Empresa {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idEmpresa;
+	private String nombre;
+	private String Ruc;
+	private String direccion;
+}

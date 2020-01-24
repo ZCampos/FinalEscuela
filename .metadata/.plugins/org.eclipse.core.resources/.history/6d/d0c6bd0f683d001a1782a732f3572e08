@@ -1,0 +1,15 @@
+package com.example.repository;
+
+import java.util.Optional;
+
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entidad.Empleado;
+import com.example.demo.util.CustomRepository;
+
+
+public interface EmpleadoRepository extends CustomRepository<Empleado, Long>{
+
+	Optional<Empleado> findById(Long id);
+
+}

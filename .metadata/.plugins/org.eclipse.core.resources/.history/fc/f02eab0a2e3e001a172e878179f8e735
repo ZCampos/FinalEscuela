@@ -1,0 +1,12 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import com.example.demo.entidad.Orden;
+import com.example.demo.entidad.OrdenDetalle;
+
+public interface OrdenService {
+	public Orden guardar(Orden orden);
+
+	public List<OrdenDetalle> obtenerListaFecha();
+}

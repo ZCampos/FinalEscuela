@@ -1,0 +1,22 @@
+---
+spring:
+  profiles: primary
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-primary:8801/eureka/,http://eureka-secondary:8802/eureka/ 
+
+server:
+  port: 8801
+---
+spring:
+  profiles: secondary
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-primary:8801/eureka/,http://eureka-tertiary:8802/eureka/ 
+server:
+  port: 8802
+

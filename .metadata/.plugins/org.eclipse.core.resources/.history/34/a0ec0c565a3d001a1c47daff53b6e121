@@ -1,0 +1,28 @@
+package com.example.demo.impl;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.dto.EmpresaDTO;
+import com.example.demo.feign.EmpresaClient;
+import com.example.demo.service.FeignService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
+public class EmpleadoFeignImpl extends FeignService{
+	@Autowired
+	private EmpresaClient empresaClient;
+	
+	@HystrixCommand(fallbackMethod = "obtenerEmpresaDefecto", groupKey = "obtenerEmpresaPorId", commandKey = "obtenerEmpresaPorId", threadPoolKey = "obtenerEmpresaPorId", 
+			commandProperties = {
+			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5")}, 
+			threadPoolProperties = {
+					@HystrixProperty(name = "queueSizeRejectionThreshold", value = "5")})
+	
+	public EmpresaDTO obtenerEmpresaPorId(Long id) {
+		return empresaClient.obtenerEmpresaPorId(id);
+	}
+	public EmpresaDTO obtenerEmpresaDefecto(Long id) {
+		EmpresaDTO empresaDTO = new EmpresaDTO();
+		empresaDTO.setNombre(id);
+		return empresaDTO;
+	}
+}

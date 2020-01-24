@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Productos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/shards.min.css">
+    </head>
+    <body>
+        <form th:action="@{/persona/personas}" th:object="${usuario}" method="post">
+    <fieldset>
+        <legend>Datos de la Persona a ingresar</legend>
+        <table>
+            <tr>
+                <td><label th:text="#{form.user.nombre}">id: </label></td>
+                <td><input type="text" th:field="*{id}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{form.user.apellido}">Apellido Paterno: </label></td>
+                <td><input type="text" th:field="*{apellido1}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{form.user.correo}">Apellido Materno: </label></td>
+                <td><input type="text" th:field="*{apellido2}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{form.user.pass}">Dni: </label></td>
+                <td><input type="text" th:field="*{dni}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{form.user.edad}">Nombre: </label></td>
+                <td><input type="text" th:field="*{edad}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{form.user.sexo}">id de Compania: </label></td>
+                <td><input type="text" th:field="*{sexo}" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Guardar Persona...</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+    </body>
+</html>

@@ -1,0 +1,9 @@
+package com.example.demo.service;
+
+import com.example.demo.exceptions.ValidacionException;
+
+public interface EmpresaService {
+	
+	public int obtenerEmpresaPorId(Long idProducto) throws ValidacionException;
+
+}

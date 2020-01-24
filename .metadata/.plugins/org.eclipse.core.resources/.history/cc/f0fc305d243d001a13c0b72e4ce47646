@@ -1,0 +1,8 @@
+server: 
+  port:
+zuul:
+  routes:
+    producto:
+     path: /producto/  
+     service-id: producto-ms
+

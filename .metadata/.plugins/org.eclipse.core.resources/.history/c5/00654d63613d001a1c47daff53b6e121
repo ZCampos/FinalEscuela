@@ -1,0 +1,8 @@
+package com.example.repository;
+
+import com.example.demo.entidad.Empleado;
+import com.example.demo.util.CustomRepository;
+
+public interface EmpleadoRepository extends CustomRepository<Empleado, Long>{
+
+}

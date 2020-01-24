@@ -1,0 +1,9 @@
+package com.example.demo.service;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.dto.EmpresaDTO;
+
+public interface FeignService {
+	public EmpresaDTO obtenerEmpresaPorId(Long id);
+}

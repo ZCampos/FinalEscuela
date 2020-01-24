@@ -1,0 +1,11 @@
+1579715464560	Rename package 'com.example.demo.Impl'
+1579715501242	Rename type 'Empleadoimpl'
+1579719559774	Copy packages
+1579719867319	Delete element
+1579722073477	Rename type 'EmpleadoFeign'
+1579722090615	Rename type 'EmpresaFeign'
+1579730027398	Rename type 'EmpleadoServiceimpl'
+1579733402243	Rename type 'EmpleadoServiceImpl'
+1579733426288	Delete element
+1579733616481	Rename package 'com.example.repository'
+1579733653515	Rename package 'com.example.demo.impl'

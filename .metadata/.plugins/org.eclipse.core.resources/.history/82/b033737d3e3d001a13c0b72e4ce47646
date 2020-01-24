@@ -1,0 +1,24 @@
+package com.example.demo.dto;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class EmpleadoDTO {
+
+	private long idEmpleado;
+	private String nombre;
+	@JsonProperty(value = "apellido_paterno")
+	private String apellidopaterno;
+	@JsonProperty(value = "apellido_materno")
+	private String apellidomaterno;
+	private String dni;
+	private Date fecha_ingreso;
+	private boolean activo;
+	private String empresa;
+}

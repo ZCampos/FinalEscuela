@@ -1,0 +1,21 @@
+package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.dto.EmpresaDTO;
+import com.example.demo.exceptions.ValidacionException;
+
+public class EmpresaController {
+	
+	
+	
+	@GetMapping("/empresa/total/{idEmpresa}")
+	public EmpresaDTO obtenerCantidadStockProducto(@PathVariable("idEmpresa") Long idEmpresa)
+			throws ValidacionException {
+		EmpresaDTO response = new EmpresaDTO();
+		response.setCantidad(empresaService.obtenerCantidadPorProducto(idEmpresa));
+		return response;
+	}
+	
+}

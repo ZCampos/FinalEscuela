@@ -1,0 +1,8 @@
+package com.example.demo.impl;
+
+public interfaceEmpleadoFeignImpl {
+	
+	public EmpresaDTO obtenerEmpresaPorId(Long id) {
+		
+	}
+}

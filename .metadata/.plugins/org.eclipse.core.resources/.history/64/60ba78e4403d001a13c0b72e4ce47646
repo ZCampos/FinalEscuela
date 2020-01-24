@@ -1,0 +1,15 @@
+package com.example.demo.impl;
+
+import com.example.demo.service.FeignService;
+
+public class EmpleadoFeignImpl extends FeignService{
+	
+	public EmpresaDTO obtenerEmpresaPorId(Long id) {
+		return empresaClient.obtenerEmpresaPorId(id);
+	}
+	public EmpresaDTO obtenerEmpresaDefecto(Long id) {
+		EmpresaDTO empresaDTO = new EmpresaDTO();
+		empresaDTO.setNombre()
+		return empresaDTO;
+	}
+}

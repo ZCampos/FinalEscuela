@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Productos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/shards.min.css">
+    </head>
+    <body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script type="text/javascript">
+ $(function() { 
+	  $('#miForm').on('submit', function(e) { 
+	    e.preventDefault();
+	  var jsonData=$(this).serializeArray()
+	    .reduce(function(a, z) { a[z.name] = z.value; return a; }, {});
+	    console.log(jsonData);
+	  });
+	});
+ </script>
+<form th:action="@{/compania/personas}" method="post" class="form_contact" id="miForm">
+  <h2>DATOS DE CONTACTO</h2>
+  <div class="user_info">
+
+    <label for="id">id</label>
+    <td><input type="text" name="id" id="dni_number" value="" /></td>
+    <br>
+
+    <label for="apellidopaterno">Apellido Paterno</label>
+    <td><input type="text" name="apellido_paterno" value="" /></td>
+    <br>
+
+    <label for="apellidomaterno">Apellido Materno</label>
+    <td><input type="tel" name="apellido_materno" value="" /></td>
+    <br>
+
+    <label for="numerodni">Dni</label>
+    <td><input type="email" name="dni" value="" /></td>
+    <br>
+    
+    <label for="nombre">idEmpresa</label>
+    <td><input type="text" name="compania_id" value="" /></td>
+    <br>
+
+    <input type="submit" value="Enviar" id="btnSend">
+
+  </div>
+</form>
+    </body>
+</html>

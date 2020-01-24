@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Productos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/shards.min.css">
+    </head>
+    <body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<form th:action="@{/compania/personas}" method="post" class="form_contact" id="guardar">
+  <h2>DATOS DE CONTACTO</h2>
+  <div class="persona">
+
+    <label for="id">id</label>
+    <td><input type="text" name="id" id="id" value="" /></td>
+    <br>
+
+    <label for="apellidopaterno">Apellido Paterno</label>
+    <td><input type="text" name="apellido_paterno" id="apellido1" value="" /></td>
+    <br>
+
+    <label for="apellidomaterno">Apellido Materno</label>
+    <td><input type="tel" name="apellido_materno" id="apellido2" value="" /></td>
+    <br>
+
+    <label for="nombre">Nombre</label>
+    <td><input type="text" name="nombre" id="nombre" value="" /></td>
+    <br>
+    
+    <label for="numerodni">Dni</label>
+    <td><input type="text" name="dni" id="dni" value="" /></td>
+    <br>
+    
+    <label for="nombre">idEmpresa</label>
+    <td><input type="text" name="compania_id" id="empresa_id" value="" /></td>
+    <br>
+  </div>
+<div class="ico" id="d">
+            <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+  </div>
+</form>
+
+            <button id="registrar">Register</button>
+    </body>
+    <script type="text/javascript">
+ $(function() { 
+	 $('#registrar').click(function(){
+	        var data = { id : $('#id').val(),
+	        		apellido1 : $('#apellido1').val(),
+	        		apellido2 : $('#apellido2').val(),
+	        		dni : $('#dni').val(),
+	        		dni : $('#nombre').val(),
+	        		compania : $('#empresa_id').val()
+
+	        		};
+	        
+	        $.ajax({
+	                url : 'http://localhost:9090/compania/personas',
+	                data : data, 
+	                method : 'post', //en este caso
+	                dataType : 'json',
+	                success : function(response){
+	                       console.log(response);
+	                },
+	                error: function(error){
+	                       //codigo error
+	                }
+	        });
+	});
+ </script>
+</html>
+

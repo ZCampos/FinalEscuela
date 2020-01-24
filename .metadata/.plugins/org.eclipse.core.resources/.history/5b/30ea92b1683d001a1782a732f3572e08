@@ -1,0 +1,26 @@
+package com.example.demo.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.demo.entidad.Empleado;
+import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.exceptions.ValidacionException;
+import com.example.demo.service.EmpleadoService;
+import com.example.repository.EmpleadoRepository;
+
+@Transactional(readOnly = true)
+
+@Service
+public class EmpleadoServiceImpl implements EmpleadoService {
+	
+	@Autowired
+	EmpleadoRepository empleadoRepository;
+	
+	@Override
+	public Empleado obtenerEmpresaPorId(Long id) throws ValidacionException, ResourceNotFoundException {
+		return empleadoRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException(String.format("No se encontro el empleado con el id:", id)));
+	}
+}

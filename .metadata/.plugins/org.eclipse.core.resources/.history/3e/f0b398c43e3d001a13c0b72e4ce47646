@@ -1,0 +1,33 @@
+package com.example.demo.entidad;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class Empleado {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idEmpleado;
+	@Column
+	private String nombre;
+	@Column
+
+	private String apellido_paterno;
+	@Column
+
+	private String apellido_materno;
+	@Column
+
+	private String dni;
+	@Column
+
+	private Date fecha_ingreso;
+	@Column
+
+	private boolean activo;
+	@Column
+	private String empresa;
+}

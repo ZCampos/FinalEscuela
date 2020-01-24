@@ -1,0 +1,6 @@
+spring:
+ application:
+   name: escuela-gateway
+ cloud:   config:
+    uri: http://localhost:8081
+    

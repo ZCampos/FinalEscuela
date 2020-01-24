@@ -1,0 +1,88 @@
+package com.example.demo.controller;
+
+
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.demo.dto.CantidadDTO;
+import com.example.demo.dto.ProductoDTO;
+import com.example.demo.dto.ProductoReducidoDTO;
+import com.example.demo.entidad.ImagenProducto;
+import com.example.demo.entidad.Producto;
+import com.example.demo.entidad.TipoProducto;
+import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.exceptions.ValidacionException;
+import com.example.demo.service.ProductoService;
+
+@RestController
+public class ProductoController {
+	
+	@Autowired
+	private DiscoveryClient client;
+	
+	@Autowired
+	private ProductoService productoService;
+	
+	public CantidadDTO getCantidad(String service, Long idProducto) {
+		List<ServiceInstance> list = client.getInstances(service);
+		if(list != null && list.size()>0 ) {
+			URI uri = list.get(0).getUri();
+			if(uri != null) {
+				return (new RestTemplate()).getForObject(uri.getPath()+ 
+						"/stock/acumulado/{idProducto}", CantidadDTO.class, idProducto);
+			}
+		}
+		return null;
+	}
+	
+
+	@GetMapping("/productos")
+	public Iterable<ProductoDTO> obtenerProductos() {
+		ModelMapper modelMapper = new ModelMapper();
+		return StreamSupport.stream(productoService.obtenerProductos().spliterator(), false)
+				.map(c -> modelMapper.map(c, ProductoDTO.class)).collect(Collectors.toList());
+	}
+
+	@GetMapping("/productos/{id}")
+	public ProductoDTO obtenerProductosPorId(@PathVariable("id")Long id) {
+		ModelMapper modelMapper = new ModelMapper();
+		ProductoDTO producto = modelMapper.map(productoService.obtenerProductoPorId(id), ProductoDTO.class);
+		producto.setCantidadStock(getCantidad("stock-ms",id).getCantidadStock());
+		return producto;
+		
+	}
+	@PostMapping("/productos")
+	public ProductoDTO guardarProducto(@Valid @RequestBody ProductoReducidoDTO productoReducidoDTO) 
+			throws ValidacionException,ResourceNotFoundException {
+		ModelMapper modelMapper = new ModelMapper();
+		Producto producto = modelMapper.map(productoReducidoDTO, Producto.class);
+		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setCodigo(productoReducidoDTO.getCodigoProducto());
+		ImagenProducto imagenProducto = new ImagenProducto();
+		imagenProducto.setRutaImagen(productoReducidoDTO.getRutaImagen());
+		imagenProducto.setRutaThumbnail(productoReducidoDTO.getRutaThumbnail());
+		
+		producto.setTipoProducto(tipoProducto);
+		producto.setImagenProducto(imagenProducto);
+		
+		return modelMapper.map(productoService.guardarProducto(productoReducidoDTO), ProductoDTO.class);
+	
+	}
+		
+}

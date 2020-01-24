@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;escuela-eureka-server-P/src/main/resources&apos;&#x0D;&#x0A;- Original project: &apos;escuela-eureka-server&apos;&#x0D;&#x0A;- Destination element: &apos;escuela-eureka-server-P/src/main/resources&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     bootstrap.yml&#x0D;&#x0A;     application.yml" description="Copy files" destination="=escuela-eureka-server-P/src\/main\/resources=/maven.pomderived=/true=/" element1="src/main/resources/bootstrap.yml" element2="src/main/resources/application.yml" files="2" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1579720416839" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,27 @@
+package com.example.demo.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.demo.entidad.Empresa;
+import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.exceptions.ValidacionException;
+import com.example.demo.repository.EmpresaRepository;
+import com.example.demo.service.EmpresaService;
+
+@Transactional(readOnly = true)
+@Service
+public class EmpresaServiceImpl implements EmpresaService{
+	
+	@Autowired
+	EmpresaRepository empresaRepository;
+
+	@Override
+	public Empresa obtenerEmpresaPorId(Long idProducto) throws ValidacionException, ResourceNotFoundException {
+		return empresaRepository.findById(idProducto).orElseThrow(
+				() -> new ResourceNotFoundException(String.format("No se encontro la empresa con el id:", idProducto)));
+	}
+
+	
+}

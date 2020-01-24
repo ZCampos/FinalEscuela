@@ -1,0 +1,15 @@
+server: 
+  port:
+zuul:
+  routes:
+    producto:
+     path: /producto/**
+     service-id: producto-ms
+    compania:
+     path: /compania/**
+     service-id: compania-ms
+    almacen:
+     path: /almacen/**
+     service-id: almacen-ms
+     
+     
