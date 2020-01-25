@@ -1,12 +1,8 @@
 package com.example.demo.service.impl;
 
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.dto.OrdenReducidaDTO;
 import com.example.demo.entidad.Orden;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.repository.OrdenRepository;
@@ -24,9 +20,31 @@ public class OrdenServiceImpl implements OrdenService {
 	}
 
 	@Override
-	public List<OrdenReducidaDTO> obtenerListaFecha(Date fechaEnvio) throws ResourceNotFoundException {
-		return ordenRepository.findByDate(fechaEnvio);
-		
+	public Iterable<Orden> listarOrdenesPorFecha(Date fechaEnvio) {
+		return ordenRepository.despuesDeUnaFecha(fechaEnvio);
 	}
+
+	@Override
+	public Iterable<Orden> listarOrdenDetallePorProducto(Long idProducto) {
+		return ordenRepository.findByDetalle_IdProducto(idProducto);
+	}
+
+	@Override
+	public Orden borrarOrdenPorId(Long idOrden) throws ResourceNotFoundException {
+		Orden orden = ordenRepository.findById(idOrden)
+				.orElseThrow(() -> new ResourceNotFoundException("Orden no registrado en la bd"));
+		ordenRepository.delete(orden);
+		return orden;
+	}
+
+	@Override
+	public Orden actualizarFechaPorId(Date fecha, Long idOrden) throws ResourceNotFoundException {
+		
+		Orden orden = ordenRepository.findById(idOrden)
+				.orElseThrow(() -> new ResourceNotFoundException("Orden no registrado en la bd"));
+		orden.setFechaEnvio(fecha);
+		return ordenRepository.save(orden);
+	}
+
 
 }

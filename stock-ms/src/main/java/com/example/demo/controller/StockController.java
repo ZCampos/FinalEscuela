@@ -38,5 +38,11 @@ public class StockController {
 	public void actualizarStock(@RequestBody ActualizarStockDTO actualizarStockDTO) {
 		stockService.actualizarStock(actualizarStockDTO);
 	}
+	
+	@PutMapping("/stock/actualizarStock")
+	public void actualizarStockporIdOrdenEliminado(@RequestBody ActualizarStockDTO actualizarStockDTO) {
+		//stockService.actualizarStock(actualizarStockDTO);
+		stockService.actualizarStockporIdOrdenEliminado(actualizarStockDTO);
+	}
 
 }

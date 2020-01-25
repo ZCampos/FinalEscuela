@@ -20,13 +20,13 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public int obtenerCantidadPorProducto(Long idProducto) throws ValidacionException {
 		return stockRepository.contarCantidadProductosStock(idProducto)
-				.orElseThrow(() -> new ValidacionException("No se encontro el Producto en la tabla stock"));
+				.orElseThrow(() -> new ValidacionException("No se encontro el Producto con el id: +"+ idProducto));
 	}
 
 	@Override
 	public int obtenerCantidadPorProductoYTienda(Long idProducto, Long idTienda) throws ValidacionException {
 		return stockRepository.contarCantidadProductosStockEnTienda(idProducto, idTienda)
-				.orElseThrow(() -> new ValidacionException("No se encontro el Producto con la Tienda en la tabla stock"));
+				.orElseThrow(() -> new ValidacionException("No se encontro el Producto con el id: "+ idProducto));
 	}
 
 	@Transactional(readOnly = false)
@@ -46,6 +46,24 @@ public class StockServiceImpl implements StockService {
 		}
 		stockRepository.saveAll(lista);
 	}
+	
+	@Transactional(readOnly = false)
+	public void actualizarStockOrdenBorradoPorId(Long idProducto, int cantidad) {
+		Iterable<Stock> lista = stockRepository.findByIdProductoOrderByCantidadDesc(idProducto);
+		for(Stock stock : lista) {
+			if(cantidad == 0)
+				break;
+			if(stock.getCantidad() == 0) {
+				cantidad += stock.getCantidad();
+				cantidad = 0;
+			}
+			else {
+				stock.setCantidad(stock.getCantidad() + cantidad);
+				cantidad = 0;
+			}
+		}
+		stockRepository.saveAll(lista);
+	}
 
 	@Transactional(readOnly = false)
 	@Override
@@ -53,7 +71,13 @@ public class StockServiceImpl implements StockService {
 		actualizarStockDTO.getDetalle().forEach(detalle -> {
 			actualizarStockPorId(detalle.getIdProducto(), detalle.getCantidad());
 		});
-		
 	}
 
+	@Transactional(readOnly = false)
+	@Override
+	public void actualizarStockporIdOrdenEliminado(ActualizarStockDTO actualizarStockDTO) {
+		actualizarStockDTO.getDetalle().forEach(detalle -> {
+			actualizarStockOrdenBorradoPorId(detalle.getIdProducto(), detalle.getCantidad());
+		});
+	}
 }

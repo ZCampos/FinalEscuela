@@ -10,4 +10,7 @@ public interface StockService {
 	public int obtenerCantidadPorProductoYTienda(Long idProducto, Long idTienda) throws ValidacionException;
 
 	public void actualizarStock(ActualizarStockDTO actualizarStockDTO);
+	
+	public void actualizarStockporIdOrdenEliminado(ActualizarStockDTO actualizarStockDTO);
+
 }

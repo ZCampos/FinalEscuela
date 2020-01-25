@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" th:src="@{/js/jquery-1.11.0.min.js}" ></script>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+</head>
+<body>
+	<div class="container">
+    	<div class="starter-template">
+    		<h1>Producto 1</h1>
+    		<span id="producto"></span>
+    	</div>
+	</div>
+	<script type="text/javascript">
+	var prefix = "";
+	$.getJSON(prefix + "/producto/productos/1",   null, displayProduct)  .fail(err);
+	
+	function displayProduct(data) {
+		$("#producto").html(data.nombre + "-" + data.descripcion);
+	}
+	
+	function err(xhr, status, msg, prefix) {
+		var text = xhr.responseText;
+		var emsg = "<p><b>AJAX Falló obteniendo " + prefix + ": " + xhr.status + " " + msg + "</b><br/></p>";
+		$("#error").append(emsg);
+		$("#error").show();
+	}
+</script>
+</body>
+</html>

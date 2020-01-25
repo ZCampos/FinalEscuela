@@ -1,0 +1,19 @@
+server:
+  port: 9090
+  
+zuul:  routes:    producto:
+      path: /producto/**
+      service-id: producto-ms
+    compania:
+      path: /compania/**
+      service-id: compania-ms
+    almacen:
+      path: /almacen/**
+      service-id: almacen-ms
+    orden:
+      path: /orden/**
+      service-id: orden-ms
+      
+    ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+
+      
